@@ -1,0 +1,50 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "User profile metadata synchronized with Firebase Authentication.",
+      "type": "object",
+      "properties": {
+        "uid": {
+          "type": "string",
+          "description": "Firebase Auth UID of the user.",
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "User full name or display handle.",
+          "maxLength": 100
+        },
+        "email": {
+          "type": "string",
+          "description": "User email address.",
+          "maxLength": 150
+        },
+        "emailVerified": {
+          "type": "boolean",
+          "description": "Whether the email is verified."
+        },
+        "photoURL": {
+          "type": "string",
+          "description": "Avatar image URL.",
+          "maxLength": 500
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "Timestamp when account profile was created."
+        },
+        "lastLoginAt": {
+          "type": "string",
+          "description": "Timestamp of most recent sign-in."
+        }
+      },
+      "required": ["uid", "email"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "UserProfile",
+      "description": "Private user profile document accessible only by the account owner."
+    }
+  }
+}
